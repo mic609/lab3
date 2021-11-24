@@ -2,16 +2,20 @@ package com.company;
 
 import java.util.Scanner;
 
-public class Person implements Comparable<Person>{
+public class Person implements Comparable{
 
-    private String firstName;
-    private String lastName;
-    private String birthday;
-    private String job;
+    protected String firstName;
+    protected String lastName;
+    protected int birthday;
+    protected String job;
+
+    //--------------------------------------------------------------------------------------------------------------------------
 
     Person(){
 
     }
+
+    //--------------------------------------------------------------------------------------------------------------------------
 
     Person(int putData){
         setFirstName();
@@ -20,17 +24,25 @@ public class Person implements Comparable<Person>{
         setJob();
     }
 
+    //--------------------------------------------------------------------------------------------------------------------------
+
     public String getFirstName() {
         return firstName;
     }
+
+    //--------------------------------------------------------------------------------------------------------------------------
 
     public String getLastName() {
         return lastName;
     }
 
-    public String getBirthday() {
+    //--------------------------------------------------------------------------------------------------------------------------
+
+    public int getBirthday() {
         return birthday;
     }
+
+    //--------------------------------------------------------------------------------------------------------------------------
 
     public String getJob() {
         return job;
@@ -49,7 +61,7 @@ public class Person implements Comparable<Person>{
     public void setBirthday(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Podaj datę urodzenia: ");
-        this.birthday = sc.nextLine();
+        this.birthday = sc.nextInt();
     }
     public void setJob(){
         Scanner sc = new Scanner(System.in);
@@ -62,9 +74,12 @@ public class Person implements Comparable<Person>{
         return firstName + " " + lastName;
     }
 
+    // Uporządkowanie zgodne z kolejnością dodawania (TreeSet)
+    // Jeśli chcielibyśmy aby uporządkowanie w kolekcji Treeset było inne np. alfabetycznie dla
+    // nazwiska, możemy zamiast "return 1;", użyć "return getLastName().compareTo(((Person)p).getLastName());"
     @Override
-    public int compareTo(Person p){
-        return 1;
+    public int compareTo(Object p){
+        return getLastName().compareTo(((Person)p).getLastName());
     }
 
 }
